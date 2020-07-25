@@ -15,3 +15,10 @@ Once completed, the distributor can be used in any hospitals, pharmacies or smal
 A personal factor that gave me the idea for this project was a call from my Grandpa in Korea, asking me if he could use my Korean citizenship to hold a place in the queue for purchasing masks. Although he lives in a fairly small city, he told me that it became a huge struggle to find masks in stores once the pandemic started, and hence many of them started a "booking" system where locals can sign up for a pack of masks and pick it up when it becomes available. I saw some flaws in this system, with one of them being the fact that it does not account for specific populations such as the old or the disabled who are more in need of masks than the healthy, young population, and thought it would be a good idea to implement a program that recognizes these needs and distributes masks in a more effective manner.
 
 Additionally, I thought it would only be fitting for me to create a project in response to the current COVID-19 pandemic, in attempts to encourage and motivate the fight against these difficult times for everyone in the world today.
+
+## User Stories
+* As a user, I want to be able to input customer data into the mask distribution list.
+* As a user, I want to be able to view the distribution list of customers waiting to receive masks and their information.
+* As a user, I want to be able to view how many masks a given customer will receive.
+* As a user, I want to be able to check off customers that have received their masks.
+* As a user, I want to be able to deleted customers from the distribution list.

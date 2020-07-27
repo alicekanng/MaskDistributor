@@ -11,7 +11,7 @@ public class CustomerTest {
     @BeforeEach
     public void runBefore() {
         testCustomer = new Customer("Alice Kang",
-                "North Vancouver, BC",
+                "Vancouver, BC",
                 19,
                 "None");
     }
@@ -24,6 +24,6 @@ public class CustomerTest {
 
     @Test
     public void testGetAddress() {
-        assertEquals("North Vancouver, BC", testCustomer.getAddress());
+        assertEquals("Vancouver, BC", testCustomer.getAddress());
     }
 }

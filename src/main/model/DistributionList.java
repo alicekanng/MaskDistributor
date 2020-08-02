@@ -51,21 +51,16 @@ public abstract class DistributionList {
     //REQUIRES: c is in this
     //EFFECTS: return the given c's place in the distribution queue
     public int getPositionCustomer(Customer c) throws CustomerNotInListException {
-        if (!queue.contains(c)) {
-            throw new CustomerNotInListException();
-        }
-
         int position = 1;
-        c.setPosition(position);
         for (Customer customer : queue) {
             if (customer != c) {
                 position++;
-                c.setPosition(position);
             } else {
-                break;
+                c.setPosition(position);
+                return c.getPosition();
             }
         }
-        return c.getPosition();
+        throw new CustomerNotInListException();
     }
 
     //REQUIRES: c is in this

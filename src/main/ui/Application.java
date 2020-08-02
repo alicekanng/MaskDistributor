@@ -3,11 +3,13 @@ package ui;
 import exceptions.CustomerDidNotReceiveMasksException;
 import exceptions.CustomerNotInListException;
 import model.Customer;
+import model.ForeignList;
 import model.LocalList;
 
 import java.util.Scanner;
 
-public class LocalApplication {
+//code referenced from FitLifeGymKiosk practice project
+public class Application {
 
     private static final String ADD_COMMAND = "add";
     private static final String GET_MASKS_COMMAND = "get masks";
@@ -18,14 +20,15 @@ public class LocalApplication {
     private static final String QUIT_COMMAND = "quit";
 
     private Scanner sc;
+    private ForeignList foreignList;
     private LocalList localList;
     private Customer customer;
     private boolean running;
 
-    //EFFECTS: constructs new LocalApplication
-    public LocalApplication(Customer customer) {
+    //EFFECTS: constructs new Application
+    public Application() {
         sc = new Scanner(System.in);
-        this.customer = customer;
+        foreignList = new ForeignList();
         localList = new LocalList();
         running = true;
     }
@@ -40,6 +43,8 @@ public class LocalApplication {
             if (sc.hasNext()) {
                 str = sc.nextLine();
                 parseInput(str);
+            } else {
+                endProgram();
             }
         }
     }
@@ -88,19 +93,19 @@ public class LocalApplication {
     //EFFECTS: prints instructions for user in order to call a certain operation
     private void printInstructions() {
         System.out.println("\nEnter '" + ADD_COMMAND
-                + "' to add the customer into the distribution list.");
+                + "' to add a customer into the distribution list.");
 
         System.out.println("Enter '" + GET_MASKS_COMMAND
-                + "' to get the number of masks the customer will receive.");
+                + "' to get a number of masks the customer will receive.");
 
         System.out.println("Enter '" + GET_DATE_COMMAND
-                + "' to get the date at which the customer will receive their masks by.");
+                + "' to get the date at which a customer will receive their masks by.");
 
         System.out.println("Enter '" + GET_POSITION_COMMAND
-                + "' to get the customer's current position in the queue.");
+                + "' to get a customer's current position in the queue.");
 
         System.out.println("Enter '" + DELETE_COMMAND
-                + "' to delete the customer from the queue.");
+                + "' to delete a customer from the queue.");
 
         System.out.println("Enter '" + PRINT_COMMAND
                 + "' to print the distribution list.");
@@ -109,18 +114,58 @@ public class LocalApplication {
                 + "' to quit the application.");
     }
 
+    //EFFECTS: gets customer information by the user's input
+    public void getCustomerInfo() {
+        System.out.println("\nEnter customer information (making sure to capitalize!):");
+
+        System.out.println("Please enter the customer's name:");
+        String name = sc.nextLine();
+
+        System.out.println("Please enter the customer's address in the format 'City, Province':");
+        String address = sc.nextLine();
+
+        System.out.println("Please enter the customer's age:");
+        int age = sc.nextInt();
+
+        System.out.println("Please enter the customer's medical conditions, if none, enter 'None':");
+        String conditions = sc.next();
+
+        System.out.println("Creating a new customer with given information:");
+        customer = new Customer(name, address, age, conditions);
+    }
+
+    //EFFECTS: add the customer to a list depending on whether they are local or foreign
+    public void addCustomerBasedOnAddress(Customer customer) {
+        if (customer.getAddress().contains("BC")) {
+            localList.addCustomer(customer);
+        } else {
+            foreignList.addCustomer(customer);
+        }
+    }
+
     //MODIFIES: this
     //EFFECTS: adds customer to distribution list when prompted
     public void handleAddCustomer() {
-        localList.addCustomer(customer);
+        getCustomerInfo();
+        addCustomerBasedOnAddress(customer);
         System.out.println("Successfully added customer into distribution list.");
         printInstructions();
     }
 
+    //EFFECTS: gets number of masks a customer will receive from their appropriate list
+    public void getMasksBasedOnAddress(Customer customer) throws CustomerNotInListException {
+        if (customer.getAddress().contains("BC")) {
+            localList.getNumberOfMasksCustomer(customer);
+        } else {
+            foreignList.getNumberOfMasksCustomer(customer);
+        }
+    }
+
     //EFFECTS: gets number of masks customer will receive when prompted
     public void handleGetMasks() {
+        getCustomerInfo();
         try {
-            localList.getNumberOfMasksCustomer(customer);
+            getMasksBasedOnAddress(customer);
         } catch (CustomerNotInListException e) {
             System.err.println("Given customer is not in the distribution list.");
         }
@@ -129,10 +174,20 @@ public class LocalApplication {
         printInstructions();
     }
 
+    //EFFECTS: gets date a customer will receive their masks from their appropriate list
+    public void getDateBasedOnAddress(Customer customer) throws CustomerNotInListException {
+        if (customer.getAddress().contains("BC")) {
+            localList.getDateCustomer(customer);
+        } else {
+            foreignList.getDateCustomer(customer);
+        }
+    }
+
     //EFFECTS: gets the date customer will receive their masks when prompted
     public void handleGetDate() {
+        getCustomerInfo();
         try {
-            localList.getDateCustomer(customer);
+            getMasksBasedOnAddress(customer);
         } catch (CustomerNotInListException e) {
             System.err.println("Given customer is not in the distribution list.");
         }
@@ -141,10 +196,20 @@ public class LocalApplication {
         printInstructions();
     }
 
+    //EFFECTS: gets position of customer in the queue of their appropriate list
+    public void getPositionBasedOnAddress(Customer customer) throws CustomerNotInListException {
+        if (customer.getAddress().contains("BC")) {
+            localList.getPositionCustomer(customer);
+        } else {
+            foreignList.getPositionCustomer(customer);
+        }
+    }
+
     //EFFECTS: gets position of customer in the queue when prompted
     public void handleGetPosition() {
+        getCustomerInfo();
         try {
-            localList.getPositionCustomer(customer);
+            getPositionBasedOnAddress(customer);
         } catch (CustomerNotInListException e) {
             System.err.println("Given customer is not in the distribution list.");
         }
@@ -153,11 +218,22 @@ public class LocalApplication {
         printInstructions();
     }
 
+    //EFFECTS: deletes customer from their appropriate list
+    public void deleteCustomerBasedOnAddress(Customer customer)
+            throws CustomerNotInListException, CustomerDidNotReceiveMasksException {
+        if (customer.getAddress().contains("BC")) {
+            localList.deleteCustomer(customer);
+        } else {
+            foreignList.deleteCustomer(customer);
+        }
+    }
+
     //MODIFIES: this
     //EFFECTS: deletes customer from distribution list when prompted
     public void handleDelete() {
+        getCustomerInfo();
         try {
-            localList.deleteCustomer(customer);
+            deleteCustomerBasedOnAddress(customer);
         } catch (CustomerNotInListException e) {
             System.err.println("Given customer is not in the distribution list.");
         } catch (CustomerDidNotReceiveMasksException e) {
@@ -167,14 +243,33 @@ public class LocalApplication {
         printInstructions();
     }
 
+    //EFFECTS: prints appropriate distribution list
+    public void printListBasedOnAddress(String address) {
+        if (address.toLowerCase().equals("local")) {
+            if (localList.queue.isEmpty()) {
+                System.out.println("The distribution list is currently empty!");
+            }
+            for (Customer c : localList.queue) {
+                System.out.println(c.getName() + ": " + c.getAddress() + ", " + c.getAge() + ", " + c.getConditions());
+            }
+        } else if (address.toLowerCase() == "foreign") {
+            if (foreignList.queue.isEmpty()) {
+                System.out.println("The distribution list is currently empty!");
+            }
+            for (Customer c : foreignList.queue) {
+                System.out.println(c.getName() + ": " + c.getAddress() + ", " + c.getAge() + ", " + c.getConditions());
+            }
+        } else {
+            System.out.println("No corresponding list found! Please try again.");
+            handlePrintList();
+        }
+    }
+
     //EFFECTS: prints distribution list when prompted
     public void handlePrintList() {
-        if (localList.queue.isEmpty()) {
-            System.out.println("The distribution list is currently empty!");
-        }
-        for (Customer c : localList.queue) {
-            System.out.println(c.getName() + ": " + c.getAddress() + ", " + c.getAge() + ", " + c.getConditions());
-        }
+        System.out.println("Please specify whether you would like to print the local or foreign distribution list.");
+        String address = sc.nextLine();
+        printListBasedOnAddress(address);
         printInstructions();
     }
 

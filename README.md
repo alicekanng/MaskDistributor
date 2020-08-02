@@ -22,3 +22,5 @@ Additionally, I thought it would only be fitting for me to create a project in r
 * As a user, I want to be able to view the the date at which a given customer will receive their masks.
 * As a user, I want to be able to view a given customer's position in the queue.
 * As a user, I want to be able to remove customers who have already received their masks from the distribution list.
+* As a user, I want to be able to save the distribution list to which I added/edited/removed customer details whenever.
+* As a user, I want to be able to open recently edited distribution lists when I start the application.

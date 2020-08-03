@@ -1,6 +1,11 @@
 package model;
 
-public class Customer {
+import persistence.FileReader;
+import persistence.Saveable;
+
+import java.io.PrintWriter;
+
+public class Customer implements Saveable {
     private String name;
     private String address;
     private int age;
@@ -62,4 +67,14 @@ public class Customer {
         this.masks = masks;
     }
 
+    @Override
+    public void save(PrintWriter printWriter) {
+        printWriter.print(name);
+        printWriter.print(FileReader.NAME_DELIM);
+        printWriter.print(address);
+        printWriter.print(FileReader.INFO_DELIM);
+        printWriter.print(age);
+        printWriter.print(FileReader.INFO_DELIM);
+        printWriter.print(conditions + "\n");
+    }
 }

@@ -250,14 +250,16 @@ public class Application {
                 System.out.println("The distribution list is currently empty!");
             }
             for (Customer c : localList.queue) {
-                System.out.println(c.getName() + ": " + c.getAddress() + ", " + c.getAge() + ", " + c.getConditions());
+                System.out.println(c.getName() + ": "
+                        + c.getAddress() + " / " + c.getAge() + " / " + c.getConditions());
             }
-        } else if (address.toLowerCase() == "foreign") {
+        } else if (address.toLowerCase().equals("foreign")) {
             if (foreignList.queue.isEmpty()) {
                 System.out.println("The distribution list is currently empty!");
             }
             for (Customer c : foreignList.queue) {
-                System.out.println(c.getName() + ": " + c.getAddress() + ", " + c.getAge() + ", " + c.getConditions());
+                System.out.println(c.getName() + ": "
+                        + c.getAddress() + " / " + c.getAge() + " / " + c.getConditions());
             }
         } else {
             System.out.println("No corresponding list found! Please try again.");

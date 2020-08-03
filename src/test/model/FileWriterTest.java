@@ -5,10 +5,7 @@ import org.junit.jupiter.api.Test;
 import persistence.FileReader;
 import persistence.FileWriter;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -23,7 +20,7 @@ public class FileWriterTest {
 
     @BeforeEach
     public void runBefore() throws FileNotFoundException {
-        testWriter = new FileWriter(new File(TEST_FILE));
+        testWriter = new FileWriter(new FileOutputStream(new File(TEST_FILE), true));
         testLocalCustomer = new Customer("Alice Kang",
                 "North Vancouver, BC",
                 19,

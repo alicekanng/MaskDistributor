@@ -9,6 +9,7 @@ import persistence.FileWriter;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -177,7 +178,7 @@ public class Application {
     //EFFECTS: save edited local distribution list to LOCAL_LIST_FILE
     public void saveLocalList(Customer customer) {
         try {
-            FileWriter fileWriter = new FileWriter(new File(LOCAL_LIST_FILE));
+            FileWriter fileWriter = new FileWriter(new FileOutputStream(new File(LOCAL_LIST_FILE), true));
             fileWriter.write(customer);
             fileWriter.close();
         } catch (FileNotFoundException e) {
@@ -188,7 +189,7 @@ public class Application {
     //EFFECTS: save edited local distribution list to LOCAL_LIST_FILE
     public void saveForeignList(Customer customer) {
         try {
-            FileWriter fileWriter = new FileWriter(new File(FOREIGN_LIST_FILE));
+            FileWriter fileWriter = new FileWriter(new FileOutputStream(new File(FOREIGN_LIST_FILE), true));
             fileWriter.write(customer);
             fileWriter.close();
         } catch (FileNotFoundException e) {

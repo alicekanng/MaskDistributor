@@ -79,6 +79,39 @@ public class CustomerTest {
     }
 
     @Test
+    public void testEqualsHashCodeDifferentNameAddress() {
+        Customer otherCustomer = new Customer("Alex Kang",
+                "Surrey, BC",
+                19,
+                "None");
+        assertFalse(testCustomer.equals(otherCustomer)
+                && otherCustomer.equals(testCustomer));
+        assertFalse(testCustomer.hashCode() == otherCustomer.hashCode());
+    }
+
+    @Test
+    public void testEqualsHashCodeDifferentAddressConditions() {
+        Customer otherCustomer = new Customer("Alice Kang",
+                "Surrey, BC",
+                19,
+                "Asthma");
+        assertFalse(testCustomer.equals(otherCustomer)
+                && otherCustomer.equals(testCustomer));
+        assertFalse(testCustomer.hashCode() == otherCustomer.hashCode());
+    }
+
+    @Test
+    public void testEqualsHashCodeDifferentNameConditions() {
+        Customer otherCustomer = new Customer("Alex Kang",
+                "North Vancouver, BC",
+                19,
+                "Asthma");
+        assertFalse(testCustomer.equals(otherCustomer)
+                && otherCustomer.equals(testCustomer));
+        assertFalse(testCustomer.hashCode() == otherCustomer.hashCode());
+    }
+
+    @Test
     public void testEqualsHashCodeAllDifferent() {
         Customer otherCustomer = new Customer("Jennifer Aniston",
                 "Surrey, BC",

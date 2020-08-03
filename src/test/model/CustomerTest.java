@@ -57,6 +57,17 @@ public class CustomerTest {
     }
 
     @Test
+    public void testEqualsHashCodeDifferentAge() {
+        Customer otherCustomer = new Customer("Alice Kang",
+                "North Vancouver, BC",
+                30,
+                "None");
+        assertFalse(testCustomer.equals(otherCustomer)
+                && otherCustomer.equals(testCustomer));
+        assertFalse(testCustomer.hashCode() == otherCustomer.hashCode());
+    }
+
+    @Test
     public void testEqualsHashCodeDifferentAddress() {
         Customer otherCustomer = new Customer("Alice Kang",
                 "Surrey, BC",
@@ -90,6 +101,39 @@ public class CustomerTest {
     }
 
     @Test
+    public void testEqualsHashCodeDifferentNameAge() {
+        Customer otherCustomer = new Customer("Alex Kang",
+                "North Vancouver, BC",
+                30,
+                "None");
+        assertFalse(testCustomer.equals(otherCustomer)
+                && otherCustomer.equals(testCustomer));
+        assertFalse(testCustomer.hashCode() == otherCustomer.hashCode());
+    }
+
+    @Test
+    public void testEqualsHashCodeDifferentNameConditions() {
+        Customer otherCustomer = new Customer("Alex Kang",
+                "North Vancouver, BC",
+                19,
+                "Asthma");
+        assertFalse(testCustomer.equals(otherCustomer)
+                && otherCustomer.equals(testCustomer));
+        assertFalse(testCustomer.hashCode() == otherCustomer.hashCode());
+    }
+
+    @Test
+    public void testEqualsHashCodeDifferentAddressAge() {
+        Customer otherCustomer = new Customer("Alice Kang",
+                "Surrey, BC",
+                30,
+                "None");
+        assertFalse(testCustomer.equals(otherCustomer)
+                && otherCustomer.equals(testCustomer));
+        assertFalse(testCustomer.hashCode() == otherCustomer.hashCode());
+    }
+
+    @Test
     public void testEqualsHashCodeDifferentAddressConditions() {
         Customer otherCustomer = new Customer("Alice Kang",
                 "Surrey, BC",
@@ -101,9 +145,53 @@ public class CustomerTest {
     }
 
     @Test
-    public void testEqualsHashCodeDifferentNameConditions() {
+    public void testEqualsHashCodeDifferentAgeConditions() {
+        Customer otherCustomer = new Customer("Alice Kang",
+                "North Vancouver, BC",
+                30,
+                "Asthma");
+        assertFalse(testCustomer.equals(otherCustomer)
+                && otherCustomer.equals(testCustomer));
+        assertFalse(testCustomer.hashCode() == otherCustomer.hashCode());
+    }
+
+    @Test
+    public void testEqualsHashCodeDifferentNameAddressAge() {
+        Customer otherCustomer = new Customer("Alex Kang",
+                "Surrey, BC",
+                30,
+                "None");
+        assertFalse(testCustomer.equals(otherCustomer)
+                && otherCustomer.equals(testCustomer));
+        assertFalse(testCustomer.hashCode() == otherCustomer.hashCode());
+    }
+
+    @Test
+    public void testEqualsHashCodeDifferentAddressAgeConditions() {
+        Customer otherCustomer = new Customer("Alice Kang",
+                "Surrey, BC",
+                30,
+                "Asthma");
+        assertFalse(testCustomer.equals(otherCustomer)
+                && otherCustomer.equals(testCustomer));
+        assertFalse(testCustomer.hashCode() == otherCustomer.hashCode());
+    }
+
+    @Test
+    public void testEqualsHashCodeDifferentAgeConditionsName() {
         Customer otherCustomer = new Customer("Alex Kang",
                 "North Vancouver, BC",
+                30,
+                "Asthma");
+        assertFalse(testCustomer.equals(otherCustomer)
+                && otherCustomer.equals(testCustomer));
+        assertFalse(testCustomer.hashCode() == otherCustomer.hashCode());
+    }
+
+    @Test
+    public void testEqualsHashCodeDifferentConditionsNameAddress() {
+        Customer otherCustomer = new Customer("Alex Kang",
+                "Surrey, BC",
                 19,
                 "Asthma");
         assertFalse(testCustomer.equals(otherCustomer)

@@ -6,13 +6,12 @@ import persistence.FileReader;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+//code referenced from TellerApp project
 public class FileReaderTest {
     private static String LOCAL_PATHNAME = "./data/testLocalListFile.txt";
     private static String FOREIGN_PATHNAME = "./data/testForeignListFile.txt";

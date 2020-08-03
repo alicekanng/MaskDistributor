@@ -4,6 +4,7 @@ import persistence.FileReader;
 import persistence.Saveable;
 
 import java.io.PrintWriter;
+import java.util.Objects;
 
 public class Customer implements Saveable {
     private String name;
@@ -76,5 +77,25 @@ public class Customer implements Saveable {
         printWriter.print(age);
         printWriter.print(FileReader.INFO_DELIM);
         printWriter.print(conditions + "\n");
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Customer customer = (Customer) o;
+        return age == customer.age
+                && Objects.equals(name, customer.name)
+                && Objects.equals(address, customer.address)
+                && Objects.equals(conditions, customer.conditions);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, address, age, conditions);
     }
 }

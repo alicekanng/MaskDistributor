@@ -5,10 +5,15 @@ import exceptions.CustomerNotInListException;
 import model.Customer;
 import model.ForeignList;
 import model.LocalList;
+import persistence.FileReader;
+import persistence.FileWriter;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
-//code referenced from FitLifeGymKiosk practice project
+//code referenced from FitLifeGymKiosk practice project and TellerApp project
 public class Application {
 
     private static final String ADD_COMMAND = "add";
@@ -18,12 +23,15 @@ public class Application {
     private static final String DELETE_COMMAND = "delete";
     private static final String PRINT_COMMAND = "print";
     private static final String QUIT_COMMAND = "quit";
+    private static final String LOCAL_LIST_FILE = "./data/localList.txt";
+    private static final String FOREIGN_LIST_FILE = "./data/foreignList.txt";
 
     private Scanner sc;
     private ForeignList foreignList;
     private LocalList localList;
     private Customer customer;
     private boolean running;
+    private FileReader fileReader;
 
     //EFFECTS: constructs new Application
     public Application() {
@@ -31,6 +39,7 @@ public class Application {
         foreignList = new ForeignList();
         localList = new LocalList();
         running = true;
+        fileReader = new FileReader();
     }
 
     //EFFECTS: accepts user input and carries out operations while this is running
@@ -38,6 +47,8 @@ public class Application {
         System.out.println("\nWhat task would you like to do?");
         printInstructions();
         String str;
+
+        loadDistributionLists();
 
         while (running) {
             if (sc.hasNext()) {
@@ -96,7 +107,7 @@ public class Application {
                 + "' to add a customer into the distribution list.");
 
         System.out.println("Enter '" + GET_MASKS_COMMAND
-                + "' to get a number of masks the customer will receive.");
+                + "' to get a number of masks a customer will receive.");
 
         System.out.println("Enter '" + GET_DATE_COMMAND
                 + "' to get the date at which a customer will receive their masks by.");
@@ -130,16 +141,71 @@ public class Application {
         System.out.println("Please enter the customer's medical conditions, if none, enter 'None':");
         String conditions = sc.next();
 
-        System.out.println("Creating a new customer with given information:");
         customer = new Customer(name, address, age, conditions);
+        findCustomerInDistributionList(address);
     }
+
+    //EFFECTS: for each c in the corresponding list, if c equals given customer, set customer to c
+    // otherwise, do nothing
+    public void findCustomerInDistributionList(String address) {
+        if (address.contains("BC")) {
+            for (Customer c : localList.queue) {
+                if (c.equals(customer)) {
+                    customer = c;
+                }
+            }
+        } else {
+            for (Customer c : foreignList.queue) {
+                if (c.equals(customer)) {
+                    customer = c;
+                }
+            }
+        }
+    }
+
+    //MODIFIES: this
+    //EFFECTS: loads customers in both LOCAL_LIST_FILE and FOREIGN_LIST_FILE if they exist
+    // otherwise, do nothing
+    public void loadDistributionLists() {
+        try {
+            localList.queue = fileReader.readCustomers(new File(LOCAL_LIST_FILE));
+            foreignList.queue = fileReader.readCustomers(new File(FOREIGN_LIST_FILE));
+        } catch (IOException e) {
+            System.out.println("There are currently no saved lists.");
+        }
+    }
+
+    //EFFECTS: save edited local distribution list to LOCAL_LIST_FILE
+    public void saveLocalList(Customer customer) {
+        try {
+            FileWriter fileWriter = new FileWriter(new File(LOCAL_LIST_FILE));
+            fileWriter.write(customer);
+            fileWriter.close();
+        } catch (FileNotFoundException e) {
+            System.err.println("Cannot find file to save to!");
+        }
+    }
+
+    //EFFECTS: save edited local distribution list to LOCAL_LIST_FILE
+    public void saveForeignList(Customer customer) {
+        try {
+            FileWriter fileWriter = new FileWriter(new File(FOREIGN_LIST_FILE));
+            fileWriter.write(customer);
+            fileWriter.close();
+        } catch (FileNotFoundException e) {
+            System.err.println("Cannot find file to save to!");
+        }
+    }
+
 
     //EFFECTS: add the customer to a list depending on whether they are local or foreign
     public void addCustomerBasedOnAddress(Customer customer) {
         if (customer.getAddress().contains("BC")) {
             localList.addCustomer(customer);
+            saveLocalList(customer);
         } else {
             foreignList.addCustomer(customer);
+            saveForeignList(customer);
         }
     }
 
@@ -149,6 +215,7 @@ public class Application {
         getCustomerInfo();
         addCustomerBasedOnAddress(customer);
         System.out.println("Successfully added customer into distribution list.");
+        System.out.println("Distribution list saved.");
         printInstructions();
     }
 
@@ -187,7 +254,7 @@ public class Application {
     public void handleGetDate() {
         getCustomerInfo();
         try {
-            getMasksBasedOnAddress(customer);
+            getDateBasedOnAddress(customer);
         } catch (CustomerNotInListException e) {
             System.err.println("Given customer is not in the distribution list.");
         }
@@ -223,8 +290,10 @@ public class Application {
             throws CustomerNotInListException, CustomerDidNotReceiveMasksException {
         if (customer.getAddress().contains("BC")) {
             localList.deleteCustomer(customer);
+            saveLocalList(customer);
         } else {
             foreignList.deleteCustomer(customer);
+            saveForeignList(customer);
         }
     }
 
@@ -240,6 +309,7 @@ public class Application {
             System.err.println("Given customer has not received any masks yet.");
         }
         System.out.println("Successfully deleted customer from the distribution list.");
+        System.out.println("Distribution list saved.");
         printInstructions();
     }
 

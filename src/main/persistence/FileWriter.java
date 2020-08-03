@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 
+//code referenced from TellerApp project
 public class FileWriter {
     private PrintWriter printWriter;
 

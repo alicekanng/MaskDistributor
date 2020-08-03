@@ -274,4 +274,13 @@ public class LocalListTest {
         testList.addCustomer(testChildCondition);
         assertEquals(testQueue, testList.printList());
     }
+
+    @Test
+    public void testEqualsHashCode() {
+        testList.addCustomer(testAdultNoCondition);
+        LocalList otherTestList = new LocalList();
+        otherTestList.addCustomer(testAdultNoCondition);
+        assertTrue(testList.equals(otherTestList));
+        assertEquals(testList.hashCode(), otherTestList.hashCode());
+    }
 }

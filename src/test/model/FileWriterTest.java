@@ -14,6 +14,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+//code referenced from TellerApp project
 public class FileWriterTest {
     private static final String TEST_FILE = "./data/testFile.txt";
     private FileWriter testWriter;

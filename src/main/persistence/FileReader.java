@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
+//code referenced from TellerApp project
 public class FileReader {
     public static final String NAME_DELIM = ": ";
     public static final String INFO_DELIM = " / ";

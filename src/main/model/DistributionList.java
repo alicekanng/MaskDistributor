@@ -5,6 +5,7 @@ import exceptions.CustomerNotInListException;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 public abstract class DistributionList {
     public static final int MASK_DISTRIBUTED = 15;
@@ -84,4 +85,20 @@ public abstract class DistributionList {
         return queue;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        DistributionList that = (DistributionList) o;
+        return Objects.equals(queue, that.queue);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(queue);
+    }
 }

@@ -1,6 +1,5 @@
 package ui;
 
-import exceptions.CustomerDidNotReceiveMasksException;
 import exceptions.CustomerNotInListException;
 import model.Customer;
 import model.ForeignList;
@@ -286,8 +285,7 @@ public class Application {
     }
 
     //EFFECTS: deletes customer from their appropriate list
-    public void deleteCustomerBasedOnAddress(Customer customer)
-            throws CustomerNotInListException, CustomerDidNotReceiveMasksException {
+    public void deleteCustomerBasedOnAddress(Customer customer) throws CustomerNotInListException {
         if (customer.getAddress().contains("BC")) {
             localList.deleteCustomer(customer);
             saveLocalList(customer);
@@ -305,8 +303,6 @@ public class Application {
             deleteCustomerBasedOnAddress(customer);
         } catch (CustomerNotInListException e) {
             System.err.println("Given customer is not in the distribution list.");
-        } catch (CustomerDidNotReceiveMasksException e) {
-            System.err.println("Given customer has not received any masks yet.");
         }
         System.out.println("Successfully deleted customer from the distribution list.");
         System.out.println("Distribution list saved.");

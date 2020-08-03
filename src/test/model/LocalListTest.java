@@ -1,6 +1,5 @@
 package model;
 
-import exceptions.CustomerDidNotReceiveMasksException;
 import exceptions.CustomerNotInListException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -228,8 +227,6 @@ public class LocalListTest {
             testList.deleteCustomer(testAdultNoCondition);
         } catch (CustomerNotInListException e) {
             fail("Caught invalid exception");
-        } catch (CustomerDidNotReceiveMasksException e) {
-            fail("Caught invalid exception");
         }
         assertEquals(testQueue, testList.printList());
     }
@@ -243,23 +240,6 @@ public class LocalListTest {
         try {
             testList.deleteCustomer(testAdultCondition);
         } catch (CustomerNotInListException e) {
-            //nothing
-        } catch (CustomerDidNotReceiveMasksException e) {
-            fail("Caught invalid exception");
-        }
-        assertEquals(testQueue, testList.printList());
-    }
-
-    @Test
-    public void testDeleteCustomerNoMaskException(){
-        testList.addCustomer(testAdultNoCondition);
-        testList.addCustomer(testSeniorCondition);
-        testList.addCustomer(testChildCondition);
-        try {
-            testList.deleteCustomer(testAdultNoCondition);
-        } catch (CustomerNotInListException e) {
-            fail("Caught invalid exception");
-        } catch (CustomerDidNotReceiveMasksException e) {
             //nothing
         }
         assertEquals(testQueue, testList.printList());

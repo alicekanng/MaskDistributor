@@ -1,11 +1,9 @@
 package model;
 
-import exceptions.CustomerDidNotReceiveMasksException;
 import exceptions.CustomerNotInListException;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Objects;
 
 public abstract class DistributionList {
     public static final int MASK_DISTRIBUTED = 15;
@@ -67,15 +65,10 @@ public abstract class DistributionList {
     //REQUIRES: c is in this
     //MODIFIES: this
     //EFFECTS: return true if customer who has already received masks was deleted from this, false otherwise
-    public boolean deleteCustomer(Customer c) throws CustomerNotInListException, CustomerDidNotReceiveMasksException {
+    public boolean deleteCustomer(Customer c) throws CustomerNotInListException {
         if (!queue.contains(c)) {
             throw new CustomerNotInListException();
         }
-
-        if (c.getMasks() == 0) {
-            throw new CustomerDidNotReceiveMasksException();
-        }
-
         queue.remove(c);
         return true;
     }

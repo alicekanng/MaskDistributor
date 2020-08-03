@@ -1,11 +1,7 @@
 package ui;
 
-import exceptions.CustomerDidNotReceiveMasksException;
-import exceptions.CustomerNotInListException;
 import model.Customer;
 import model.DistributionList;
-import model.ForeignList;
-import model.LocalList;
 
 import java.util.Scanner;
 

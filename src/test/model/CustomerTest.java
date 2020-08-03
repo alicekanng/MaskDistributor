@@ -77,4 +77,22 @@ public class CustomerTest {
                 && otherCustomer.equals(testCustomer));
         assertFalse(testCustomer.hashCode() == otherCustomer.hashCode());
     }
+
+    @Test
+    public void testEqualsHashCodeAllDifferent() {
+        Customer otherCustomer = new Customer("Jennifer Aniston",
+                "Surrey, BC",
+                30,
+                "Asthma");
+        assertFalse(testCustomer.equals(otherCustomer)
+                && otherCustomer.equals(testCustomer));
+        assertFalse(testCustomer.hashCode() == otherCustomer.hashCode());
+    }
+
+    @Test
+    public void testEqualsHashCodeNull() {
+        Customer otherCustomer = null;
+        assertFalse(testCustomer.equals(otherCustomer)
+                && otherCustomer.equals(testCustomer));
+    }
 }

@@ -27,6 +27,7 @@ public class CustomerTest {
         assertEquals("Vancouver, BC", testCustomer.getAddress());
     }
 
+    //tests for overriden equals and hashcode
     @Test
     public void testEqualsHashCode() {
         Customer otherCustomer = new Customer("Alice Kang",

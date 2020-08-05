@@ -12,7 +12,7 @@ public class Main {
     private Customer customer;
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+//        Scanner sc = new Scanner(System.in);
         System.out.println("Welcome to the Mask Distributor application!");
         Application app = new Application();
         app.handleUserInput();

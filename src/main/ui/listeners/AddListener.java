@@ -32,14 +32,14 @@ public class AddListener implements ActionListener {
                 index++;
             }
 
-            playSound("AddCustomerSound.wav");
+            playAddCustomerSound();
             listTab.getListModel().insertElementAt(entry, index);
             listTab.getCustomerEntry().requestFocusInWindow();
             listTab.getCustomerEntry().setText("");
         }
     }
 
-    public void playSound(String sound) {
+    public void playAddCustomerSound() {
         try {
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(ADD_CUSTOMER_SOUND));
             Clip clip = AudioSystem.getClip();

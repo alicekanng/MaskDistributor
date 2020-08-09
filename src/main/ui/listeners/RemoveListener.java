@@ -21,14 +21,14 @@ public class RemoveListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         int index = listUI.getDistributionList().getSelectedIndex();
         if (index != -1) {
-            playSound("RemoveCustomerSound.wav");
+            playRemoveCustomerSound();
             listUI.getListModel().remove(index);
             listUI.getDistributionList().setSelectedIndex(index);
             listUI.getDistributionList().ensureIndexIsVisible(index);
         }
     }
 
-    public void playSound(String sound) {
+    public void playRemoveCustomerSound() {
         try {
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(REMOVE_CUSTOMER_SOUND));
             Clip clip = AudioSystem.getClip();

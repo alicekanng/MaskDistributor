@@ -86,19 +86,10 @@ public class Customer implements Saveable {
         }
         Customer customer = (Customer) o;
         boolean ageEquals = age == customer.age;
-        if (!ageEquals) {
-            return false;
-        }
         boolean nameEquals = Objects.equals(name, customer.name);
-        if (!nameEquals) {
-            return false;
-        }
         boolean addressEquals = Objects.equals(address, customer.address);
-        if (!addressEquals) {
-            return false;
-        }
         boolean conditionEquals = Objects.equals(conditions, customer.conditions);
-        return conditionEquals;
+        return ageEquals && nameEquals && addressEquals && conditionEquals;
     }
 
     @Override

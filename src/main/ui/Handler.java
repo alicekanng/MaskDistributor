@@ -16,12 +16,49 @@ public class Handler {
     private Application app;
 
     public Handler(Application app) {
-        sc = new Scanner(System.in);
-        localList = new LocalList();
-        foreignList = new ForeignList();
+        sc = app.getSc();
         this.app = app;
+        localList = app.getLocalList();
+        foreignList = app.getForeignList();
     }
 
+    //EFFECTS: gets customer information by the user's input
+    public void getCustomerInfo() {
+        System.out.println("\nEnter customer information (making sure to capitalize!):");
+
+        System.out.println("Please enter the customer's name:");
+        String name = sc.nextLine();
+
+        System.out.println("Please enter the customer's address in the format 'City, Province':");
+        String address = sc.nextLine();
+
+        System.out.println("Please enter the customer's age:");
+        int age = sc.nextInt();
+
+        System.out.println("Please enter the customer's medical conditions, if none, enter 'None':");
+        String conditions = sc.next();
+
+        customer = new Customer(name, address, age, conditions);
+        findCustomerInDistributionList(address);
+    }
+
+    //EFFECTS: for each c in the corresponding list, if c equals given customer, set customer to c
+    // otherwise, do nothing
+    public void findCustomerInDistributionList(String address) {
+        if (address.contains("BC")) {
+            for (Customer c : localList.queue) {
+                if (c.equals(customer)) {
+                    customer = c;
+                }
+            }
+        } else {
+            for (Customer c : foreignList.queue) {
+                if (c.equals(customer)) {
+                    customer = c;
+                }
+            }
+        }
+    }
 
     //EFFECTS: add the customer to a list depending on whether they are local or foreign
     public void addCustomerBasedOnAddress(Customer customer) {
@@ -37,7 +74,7 @@ public class Handler {
     //MODIFIES: this
     //EFFECTS: adds customer to distribution list when prompted
     public void handleAddCustomer() {
-        app.getCustomerInfo();
+        getCustomerInfo();
         addCustomerBasedOnAddress(customer);
         System.out.println("Successfully added customer into distribution list.");
         System.out.println("Distribution list saved.");
@@ -55,7 +92,7 @@ public class Handler {
 
     //EFFECTS: gets number of masks customer will receive when prompted
     public void handleGetMasks() {
-        app.getCustomerInfo();
+        getCustomerInfo();
         try {
             getMasksBasedOnAddress(customer);
         } catch (CustomerNotInListException e) {
@@ -77,7 +114,7 @@ public class Handler {
 
     //EFFECTS: gets the date customer will receive their masks when prompted
     public void handleGetDate() {
-        app.getCustomerInfo();
+        getCustomerInfo();
         try {
             getDateBasedOnAddress(customer);
         } catch (CustomerNotInListException e) {
@@ -99,7 +136,7 @@ public class Handler {
 
     //EFFECTS: gets position of customer in the queue when prompted
     public void handleGetPosition() {
-        app.getCustomerInfo();
+        getCustomerInfo();
         try {
             getPositionBasedOnAddress(customer);
         } catch (CustomerNotInListException e) {
@@ -124,7 +161,7 @@ public class Handler {
     //MODIFIES: this
     //EFFECTS: deletes customer from distribution list when prompted
     public void handleDelete() {
-        app.getCustomerInfo();
+        getCustomerInfo();
         try {
             deleteCustomerBasedOnAddress(customer);
         } catch (CustomerNotInListException e) {
@@ -162,7 +199,7 @@ public class Handler {
     //EFFECTS: prints distribution list when prompted
     public void handlePrintList() {
         System.out.println("Please specify whether you would like to print the local or foreign distribution list.");
-        String address = sc.nextLine();
+        String address = sc.next();
         printListBasedOnAddress(address);
         app.printInstructions();
     }
@@ -171,6 +208,7 @@ public class Handler {
     public void endProgram() {
         System.out.println("Ending application.");
         sc.close();
+        System.exit(0);
     }
 
 }

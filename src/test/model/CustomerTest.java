@@ -11,7 +11,7 @@ public class CustomerTest {
     @BeforeEach
     public void runBefore() {
         testCustomer = new Customer("Alice Kang",
-                "Vancouver, BC",
+                "North Vancouver, BC",
                 19,
                 "None");
     }
@@ -24,7 +24,7 @@ public class CustomerTest {
 
     @Test
     public void testGetAddress() {
-        assertEquals("Vancouver, BC", testCustomer.getAddress());
+        assertEquals("North Vancouver, BC", testCustomer.getAddress());
     }
 
     //tests for overriden equals and hashcode

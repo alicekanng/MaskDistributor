@@ -43,12 +43,6 @@ public class Application {
         fileReader = new FileReader();
         handler = new Handler(this);
         listUI = new DistributionListUI();
-
-        //Create and set up the content pane.
-//        JComponent newContentPane = localTab;
-//        newContentPane.setOpaque(true);
-//        frame.setContentPane(newContentPane);
-//        frame.setVisible(true);
     }
 
     //EFFECTS: accepts user input and carries out operations while this is running

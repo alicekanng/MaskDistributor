@@ -10,15 +10,15 @@ import javax.swing.event.ListSelectionEvent;
 import java.awt.*;
 
 public class ForeignListTab extends ListTab {
-    private JList foreignList;
-    private DefaultListModel foreignModel;
+    private JList<String> foreignList;
+    private DefaultListModel<String> foreignModel;
     private JScrollPane listScrollPane;
 
     public ForeignListTab() {
         super();
 
-        foreignModel = new DefaultListModel();
-        foreignList = new JList(foreignModel);
+        foreignModel = new DefaultListModel<String>();
+        foreignList = new JList<String>(foreignModel);
         listSetUp();
     }
 
@@ -26,8 +26,8 @@ public class ForeignListTab extends ListTab {
     public void addCustomersToListModel(DistributionList list) {
         for (Customer c : list.queue) {
             String entry = c.getName() + NAME_DELIM
-                    + c.getAge() + INFO_DELIM
                     + c.getAddress() + INFO_DELIM
+                    + c.getAge() + INFO_DELIM
                     + c.getConditions();
             foreignModel.addElement(entry);
         }
@@ -46,7 +46,7 @@ public class ForeignListTab extends ListTab {
     public void addButtonSetUp() {
         addButton = new JButton(ADD_STRING);
         addButton.setActionCommand(ADD_STRING);
-        addButton.addActionListener(new AddListener(addButton, this));
+        addButton.addActionListener(new AddListener(this));
     }
 
     @Override

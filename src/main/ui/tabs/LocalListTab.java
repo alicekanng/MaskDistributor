@@ -10,15 +10,15 @@ import javax.swing.event.ListSelectionEvent;
 import java.awt.*;
 
 public class LocalListTab extends ListTab {
-    private JList localList;
-    private DefaultListModel localModel;
+    private JList<String> localList;
+    private DefaultListModel<String> localModel;
     private JScrollPane listScrollPane;
 
     public LocalListTab() {
         super();
 
-        localModel = new DefaultListModel();
-        localList = new JList(localModel);
+        localModel = new DefaultListModel<String>();
+        localList = new JList<String>(localModel);
         listSetUp();
     }
 
@@ -26,13 +26,12 @@ public class LocalListTab extends ListTab {
     public void addCustomersToListModel(DistributionList list) {
         for (Customer c : list.queue) {
             String entry = c.getName() + NAME_DELIM
-                    + c.getAge() + INFO_DELIM
                     + c.getAddress() + INFO_DELIM
+                    + c.getAge() + INFO_DELIM
                     + c.getConditions();
             localModel.addElement(entry);
         }
     }
-
 
     @Override
     public void listSetUp() {
@@ -48,7 +47,7 @@ public class LocalListTab extends ListTab {
     public void addButtonSetUp() {
         addButton = new JButton(ADD_STRING);
         addButton.setActionCommand(ADD_STRING);
-        addButton.addActionListener(new AddListener(addButton, this));
+        addButton.addActionListener(new AddListener(this));
     }
 
     @Override

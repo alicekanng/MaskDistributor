@@ -11,23 +11,24 @@ import java.io.File;
 
 public class RemoveListener implements ActionListener {
     private static final String REMOVE_CUSTOMER_SOUND = "./data/RemoveCustomerSound.wav";
-    private ListTab listUI;
+    private ListTab listTab;
 
-    public RemoveListener(ListTab listUI) {
-        this.listUI = listUI;
+    public RemoveListener(ListTab listTab) {
+        this.listTab = listTab;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        int index = listUI.getDistributionList().getSelectedIndex();
+        int index = listTab.getDistributionList().getSelectedIndex();
         if (index != -1) {
             playRemoveCustomerSound();
-            listUI.getListModel().remove(index);
-            listUI.getDistributionList().setSelectedIndex(index);
-            listUI.getDistributionList().ensureIndexIsVisible(index);
+            listTab.getListModel().remove(index);
+            listTab.getDistributionList().setSelectedIndex(index);
+            listTab.getDistributionList().ensureIndexIsVisible(index);
         }
     }
 
+    //code referenced from: http://suavesnippets.blogspot.com/2011/06/add-sound-on-jbutton-click-in-java.html
     public void playRemoveCustomerSound() {
         try {
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(REMOVE_CUSTOMER_SOUND));

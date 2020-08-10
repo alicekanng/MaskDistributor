@@ -1,3 +1,4 @@
 Alice: Vancouver, BC / 19 / None
 Steve: Surrey, BC / 30 / Asthma
 Emma: Surrey, BC / 35 / Pregnant
+Sara: Richmond, BC / 12 / None

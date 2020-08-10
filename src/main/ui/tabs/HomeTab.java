@@ -6,30 +6,32 @@ import ui.listeners.LocalButtonListener;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class HomeTab extends JPanel {
     private static final String GREETING = "Welcome to the Mask Distributor Application!";
+    private static final String INSTRUCTIONS = "Please choose which distribution list you would like to load.";
     private JLabel greeting;
+    private JLabel instructions;
     private JButton localButton;
     private JButton foreignButton;
     private DistributionListUI ui;
 
     public HomeTab(DistributionListUI ui) {
         this.ui = ui;
-        setLayout(new GridLayout(2, 1));
 
-        placeGreeting();
-        placeListAccessButtons();
+        greeting = new JLabel(GREETING);
+        instructions = new JLabel(INSTRUCTIONS);
+
+        setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridwidth = GridBagConstraints.REMAINDER;
+        add(greeting, gbc);
+        add(instructions, gbc);
+        gbc.insets = new Insets(30, 0, 0, 0);
+        add(placeListAccessButtons(), gbc);
     }
 
-    private void placeGreeting() {
-        greeting = new JLabel(GREETING, JLabel.CENTER);
-        this.add(greeting);
-    }
-
-    private void placeListAccessButtons() {
+    private JPanel placeListAccessButtons() {
         localButton = new JButton("Local Distribution List");
         foreignButton = new JButton("Foreign Distribution List");
 
@@ -39,7 +41,7 @@ public class HomeTab extends JPanel {
         localButton.addActionListener(new LocalButtonListener(localButton, ui));
         foreignButton.addActionListener(new ForeignButtonListener(foreignButton, ui));
 
-        this.add(buttonRow);
+        return buttonRow;
     }
 
     private JPanel formatButtonRow(JButton b1, JButton b2) {

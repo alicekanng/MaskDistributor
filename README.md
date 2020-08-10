@@ -22,5 +22,12 @@ Additionally, I thought it would only be fitting for me to create a project in r
 * As a user, I want to be able to view the the date at which a given customer will receive their masks.
 * As a user, I want to be able to view a given customer's position in the queue.
 * As a user, I want to be able to remove customers who have already received their masks from the distribution list.
-* As a user, I want to be able to save the distribution list whenever I add/remove a customer.
+* As a user, I want to be able to save the distribution list whenever I add a customer.
 * As a user, I want to be able to print previously edited versions of the distribution lists when I start the application.
+
+## Instructions for Grader
+* You can generate the first required event (adding customers onto the distribution list) by clicking which distribution list you would like to add on to from the home tab, entering the customer's details, then clicking the "Add customer" button.
+* You can generate the second required event (removing customers from the distribution list) by clicking which distribution list you would like to add on to from the home tab, selecting the customer that you wish to remove, then clicking the "Remove customer" button.
+* You can trigger my audio component by clicking on any of the following buttons: "Add customer", "Remove customer", "Local Distribution List", "Foreign Distribution List".
+* You can save the state of my application by simple adding another customer, then quitting the program.
+* You can reload the state of my application automatically, every time the application runs again.

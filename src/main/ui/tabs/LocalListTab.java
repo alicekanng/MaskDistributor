@@ -2,8 +2,6 @@ package ui.tabs;
 
 import model.Customer;
 import model.DistributionList;
-import ui.listeners.AddListener;
-import ui.listeners.RemoveListener;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -45,24 +43,6 @@ public class LocalListTab extends ListTab {
         localList.setVisibleRowCount(5);
         listScrollPane = new JScrollPane(localList);
         this.add(listScrollPane, BorderLayout.CENTER);
-    }
-
-    //MODIFIES: this
-    //EFFECTS: sets up add customer button
-    @Override
-    public void addButtonSetUp() {
-        addButton = new JButton(ADD_STRING);
-        addButton.setActionCommand(ADD_STRING);
-        addButton.addActionListener(new AddListener(this));
-    }
-
-    //MODIFIES: this
-    //EFFECTS: sets up remove customer button
-    @Override
-    public void removeButtonSetUp() {
-        removeButton = new JButton(REMOVE_STRING);
-        removeButton.setActionCommand(REMOVE_STRING);
-        removeButton.addActionListener(new RemoveListener(this));
     }
 
     //MODIFIES: this

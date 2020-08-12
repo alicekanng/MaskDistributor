@@ -45,6 +45,7 @@ public class Application {
         listUI = new DistributionListUI();
     }
 
+    //MODIFIES: this
     //EFFECTS: accepts user input and carries out operations while this is running
     public void handleUserInput() {
         System.out.println("\nWhat task would you like to do?");
@@ -68,7 +69,6 @@ public class Application {
         }
     }
 
-    //MODIFIES: this
     //EFFECTS: prints options of operations for user, if quit command is inputted, this stops running
     private void parseInput(String str) {
         if (str.length() > 0) {
@@ -156,7 +156,7 @@ public class Application {
         }
     }
 
-    //EFFECTS: save edited local distribution list to LOCAL_LIST_FILE
+    //EFFECTS: save edited foreign distribution list to FOREIGN_LIST_FILE
     public void saveForeignList(Customer customer) {
         try {
             FileWriter fileWriter = new FileWriter(new FileOutputStream(new File(FOREIGN_LIST_FILE), true));

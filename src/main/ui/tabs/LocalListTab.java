@@ -22,6 +22,8 @@ public class LocalListTab extends ListTab {
         listSetUp();
     }
 
+    //MODIFIES: this
+    //EFFECTS: adds all the customers from given list into the GUI list
     @Override
     public void addCustomersToListModel(DistributionList list) {
         for (Customer c : list.queue) {
@@ -33,6 +35,8 @@ public class LocalListTab extends ListTab {
         }
     }
 
+    //MODIFIES: this
+    //EFFECTS: sets up the GUI list
     @Override
     public void listSetUp() {
         localList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
@@ -43,6 +47,8 @@ public class LocalListTab extends ListTab {
         this.add(listScrollPane, BorderLayout.CENTER);
     }
 
+    //MODIFIES: this
+    //EFFECTS: sets up add customer button
     @Override
     public void addButtonSetUp() {
         addButton = new JButton(ADD_STRING);
@@ -50,6 +56,8 @@ public class LocalListTab extends ListTab {
         addButton.addActionListener(new AddListener(this));
     }
 
+    //MODIFIES: this
+    //EFFECTS: sets up remove customer button
     @Override
     public void removeButtonSetUp() {
         removeButton = new JButton(REMOVE_STRING);
@@ -57,6 +65,9 @@ public class LocalListTab extends ListTab {
         removeButton.addActionListener(new RemoveListener(this));
     }
 
+    //MODIFIES: this
+    //EFFECTS: if the list is not in the course of being selected and there is no selected index,
+    // do not enable the remove customer button, otherwise, enable it
     @Override
     public void valueChanged(ListSelectionEvent e) {
         if (!e.getValueIsAdjusting()) {

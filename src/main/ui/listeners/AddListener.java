@@ -16,7 +16,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class AddListener implements ActionListener {
-    private static final String ADD_CUSTOMER_SOUND = "./data/AddCustomerSound.wav";
+    private static final String ADD_CUSTOMER_SOUND = "./data/sounds/AddCustomerSound.wav";
 
     private ListTab listTab;
     private List<String> entries;
@@ -31,6 +31,8 @@ public class AddListener implements ActionListener {
         customers = new LinkedList<>();
     }
 
+    //EFFECTS: adds user input to list of strings of customer data, then inserts the entry into either
+    // after the selected index of the GUI list or at the front of the list if there is no selected index
     @Override
     public void actionPerformed(ActionEvent e) {
         String entry = listTab.getCustomerEntry().getText();
@@ -52,6 +54,8 @@ public class AddListener implements ActionListener {
         }
     }
 
+    //EFFECTS: parses the list of strings of customer data into a list of customers, then saves the list into a
+    // file according to the customer's address
     public void saveEntryToFile() {
         FileReader fileReader = new FileReader();
         customers = fileReader.parseCustomers(entries);
@@ -65,6 +69,7 @@ public class AddListener implements ActionListener {
         }
     }
 
+    //EFFECTS: helper to save the customers into the Foreign list file
     private void saveToForeignFile(Customer c) {
         try {
             FileWriter fileWriter = new FileWriter(new FileOutputStream(new File(FOREIGN_LIST_FILE), true));
@@ -75,6 +80,7 @@ public class AddListener implements ActionListener {
         }
     }
 
+    //EFFECTS: helper to save the customers into the Local list file
     private void saveToLocalFile(Customer c) {
         try {
             FileWriter fileWriter = new FileWriter(new FileOutputStream(new File(LOCAL_LIST_FILE), true));
@@ -85,6 +91,7 @@ public class AddListener implements ActionListener {
         }
     }
 
+    //EFFECTS: plays sound every time the add button is pressed
     //code referenced from: http://suavesnippets.blogspot.com/2011/06/add-sound-on-jbutton-click-in-java.html
     public void playAddCustomerSound() {
         try {

@@ -35,6 +35,8 @@ public class DistributionListUI extends JFrame {
         setVisible(true);
     }
 
+    //MODIFIES: this
+    //EFFECTS: loads the tabs of the application on the side bar
     private void loadTabs() {
         homeTab = new HomeTab(this);
         localTab = new LocalListTab();

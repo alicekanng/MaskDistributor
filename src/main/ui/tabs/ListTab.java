@@ -34,7 +34,6 @@ public abstract class ListTab extends JPanel implements ListSelectionListener {
         buttonPanelSetUp();
     }
 
-    //add elements loop through queue
     public abstract void addCustomersToListModel(DistributionList list);
 
     public abstract void listSetUp();
@@ -43,6 +42,8 @@ public abstract class ListTab extends JPanel implements ListSelectionListener {
 
     public abstract void removeButtonSetUp();
 
+    //MODIFIES: this
+    //EFFECTS: sets up the button and textbox panel on both of the list tabs
     public void buttonPanelSetUp() {
         buttonPane.setLayout(new BoxLayout(buttonPane, BoxLayout.LINE_AXIS));
         buttonPane.add(addButton);
@@ -54,6 +55,8 @@ public abstract class ListTab extends JPanel implements ListSelectionListener {
         this.add(buttonPane, BorderLayout.PAGE_END);
     }
 
+    //MODIFIES: this
+    //EFFECTS: constructs new customer entry textbox
     public void customerEntrySetUp() {
         customerEntry = new JTextField();
     }

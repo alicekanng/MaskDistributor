@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 
 public class LocalButtonListener implements ActionListener {
-    private static final String LOAD_LIST_SOUND = "./data/LoadListSound.wav";
+    private static final String LOAD_LIST_SOUND = "./data/sounds/LoadListSound.wav";
 
     private JButton localButton;
     private DistributionListUI ui;
@@ -21,6 +21,7 @@ public class LocalButtonListener implements ActionListener {
         this.ui = ui;
     }
 
+    //EFFECTS: switches the screen to the local list tab once the load local list button is pressed from the home tab
     @Override
     public void actionPerformed(ActionEvent e) {
         String buttonPressed = e.getActionCommand();
@@ -30,6 +31,7 @@ public class LocalButtonListener implements ActionListener {
         }
     }
 
+    //EFFECTS: plays sound every time the local list button is pressed
     //code referenced from: http://suavesnippets.blogspot.com/2011/06/add-sound-on-jbutton-click-in-java.html
     public void playLoadListSound() {
         try {

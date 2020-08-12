@@ -22,7 +22,8 @@ public class Handler {
         foreignList = app.getForeignList();
     }
 
-    //EFFECTS: gets customer information by the user's input
+    //EFFECTS: gets customer information from the user's input, constructs the customer,
+    // iterates through both lists to find if the customer is already in the list
     public void getCustomerInfo() {
         System.out.println("\nEnter customer information (making sure to capitalize!):");
 

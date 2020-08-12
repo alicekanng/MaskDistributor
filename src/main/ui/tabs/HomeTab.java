@@ -31,6 +31,8 @@ public class HomeTab extends JPanel {
         add(placeListAccessButtons(), gbc);
     }
 
+    //MODIFIES: this
+    //EFFECTS: places the two buttons that switch the tab to its according list tab
     private JPanel placeListAccessButtons() {
         localButton = new JButton("Local Distribution List");
         foreignButton = new JButton("Foreign Distribution List");
@@ -44,6 +46,8 @@ public class HomeTab extends JPanel {
         return buttonRow;
     }
 
+    //MODIFIES: this
+    //EFFECTS: formats the rows containing the load list buttons
     private JPanel formatButtonRow(JButton b1, JButton b2) {
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new FlowLayout());

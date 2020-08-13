@@ -28,6 +28,7 @@ public class FileReader {
     }
 
     //EFFECTS: returns list of strings which correspond to each row of the given file
+    // throw IOException if an exception is raised when opening or reading given file
     public List<String> readFile(File file) throws IOException {
         return Files.readAllLines(file.toPath());
     }

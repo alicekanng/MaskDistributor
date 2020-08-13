@@ -8,16 +8,16 @@ import javax.swing.*;
 
 // Sets up the GUI frame with all its tabs
 public class DistributionListUI extends JFrame {
-    private HomeTab homeTab;
-    private LocalListTab localTab;
-    private ForeignListTab foreignTab;
-
     public static final int HOME_TAB_INDEX = 0;
     public static final int LOCAL_TAB_INDEX = 1;
     public static final int FOREIGN_TAB_INDEX = 2;
 
     private static final int WIDTH = 600;
     private static final int HEIGHT = 300;
+
+    private HomeTab homeTab;
+    private LocalListTab localTab;
+    private ForeignListTab foreignTab;
 
     private JTabbedPane sidebar;
 
@@ -50,6 +50,7 @@ public class DistributionListUI extends JFrame {
         sidebar.setTitleAt(FOREIGN_TAB_INDEX, "Foreign List");
     }
 
+    //getters:
     public LocalListTab getLocalTab() {
         return localTab;
     }

@@ -24,6 +24,7 @@ public class FileWriter {
         printWriter.close();
     }
 
+    //getters:
     public PrintWriter getPrintWriter() {
         return printWriter;
     }

@@ -9,7 +9,6 @@ import java.util.Scanner;
 
 // Handles all input of customer details and output of the corresponding customer's info
 public class Handler {
-
     private Scanner sc;
     private LocalList localList;
     private ForeignList foreignList;
@@ -142,6 +141,7 @@ public class Handler {
         System.exit(0);
     }
 
+    //getters:
     public LocalList getLocalList() {
         return localList;
     }

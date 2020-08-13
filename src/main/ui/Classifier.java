@@ -5,6 +5,7 @@ import model.Customer;
 import model.ForeignList;
 import model.LocalList;
 
+//classifies whether a customer belongs to the local or foreign distribution list depending on their address
 public class Classifier {
     private Handler handler;
     private Saver saver;
@@ -30,6 +31,7 @@ public class Classifier {
     }
 
     //EFFECTS: gets number of masks a customer will receive from their appropriate list
+    // throw CustomerNotInListException if customer is not already in this
     public void getMasksBasedOnAddress(Customer customer) throws CustomerNotInListException {
         if (customer.getAddress().contains("BC")) {
             localList.getNumberOfMasksCustomer(customer);
@@ -39,6 +41,7 @@ public class Classifier {
     }
 
     //EFFECTS: gets date a customer will receive their masks from their appropriate list
+    // throw CustomerNotInListException if customer is not already in this
     public void getDateBasedOnAddress(Customer customer) throws CustomerNotInListException {
         if (customer.getAddress().contains("BC")) {
             localList.getDateCustomer(customer);
@@ -48,6 +51,7 @@ public class Classifier {
     }
 
     //EFFECTS: gets position of customer in the queue of their appropriate list
+    // throw CustomerNotInListException if customer is not already in this
     public void getPositionBasedOnAddress(Customer customer) throws CustomerNotInListException {
         if (customer.getAddress().contains("BC")) {
             localList.getPositionCustomer(customer);
@@ -57,6 +61,7 @@ public class Classifier {
     }
 
     //EFFECTS: deletes customer from their appropriate list
+    // throw CustomerNotInListException if customer is not already in this
     public void deleteCustomerBasedOnAddress(Customer customer) throws CustomerNotInListException {
         if (customer.getAddress().contains("BC")) {
             localList.deleteCustomer(customer);
@@ -68,6 +73,7 @@ public class Classifier {
     }
 
     //EFFECTS: prints appropriate distribution list
+    // throw CustomerNotInListException if customer is not already in this
     public void printListBasedOnAddress(String address) {
         if (address.toLowerCase().equals("local")) {
             if (localList.queue.isEmpty()) {

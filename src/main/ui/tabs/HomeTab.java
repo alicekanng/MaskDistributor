@@ -12,6 +12,7 @@ import java.awt.*;
 public class HomeTab extends JPanel {
     private static final String GREETING = "Welcome to the Mask Distributor Application!";
     private static final String INSTRUCTIONS = "Please choose which distribution list you would like to load.";
+
     private JLabel greeting;
     private JLabel instructions;
     private JButton localButton;

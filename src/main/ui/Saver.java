@@ -5,6 +5,7 @@ import persistence.FileWriter;
 
 import java.io.*;
 
+//saves changes made to the distribution lists in their files
 public class Saver {
     private static final String LOCAL_LIST_FILE = "./data/localList.txt";
     private static final String FOREIGN_LIST_FILE = "./data/foreignList.txt";

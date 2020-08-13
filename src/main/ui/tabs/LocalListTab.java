@@ -60,6 +60,7 @@ public class LocalListTab extends ListTab {
         }
     }
 
+    //getters:
     @Override
     public DefaultListModel getListModel() {
         return localModel;

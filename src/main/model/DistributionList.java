@@ -22,8 +22,8 @@ public abstract class DistributionList {
         queue.add(c);
     }
 
-    //REQUIRES: c is in this
     //EFFECTS: return the number of masks c will receive
+    // throw CustomerNotInListException if c is not already in this
     public int getNumberOfMasksCustomer(Customer c) throws CustomerNotInListException {
         if (!queue.contains(c)) {
             throw new CustomerNotInListException();
@@ -44,12 +44,12 @@ public abstract class DistributionList {
         return c.getMasks();
     }
 
-    //REQUIRES: c is in this
     //EFFECTS: return the number of days c will receive their masks in
+    // throw CustomerNotInListException if c is not already in this
     protected abstract int getDateCustomer(Customer c) throws CustomerNotInListException;
 
-    //REQUIRES: c is in this
     //EFFECTS: return the given c's place in the distribution queue
+    // throw CustomerNotInListException if c is not already in this
     public int getPositionCustomer(Customer c) throws CustomerNotInListException {
         int position = 1;
         for (Customer customer : queue) {
@@ -63,9 +63,9 @@ public abstract class DistributionList {
         throw new CustomerNotInListException();
     }
 
-    //REQUIRES: c is in this
     //MODIFIES: this
     //EFFECTS: return true if customer who has already received masks was deleted from this, false otherwise
+    // throw CustomerNotInListException if c is not already in this
     public boolean deleteCustomer(Customer c) throws CustomerNotInListException {
         if (!queue.contains(c)) {
             throw new CustomerNotInListException();

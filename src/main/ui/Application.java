@@ -1,15 +1,11 @@
 package ui;
 
-import model.Customer;
 import model.ForeignList;
 import model.LocalList;
 import persistence.FileReader;
-import persistence.FileWriter;
 import ui.tabs.ListTab;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -17,7 +13,6 @@ import java.util.Scanner;
 // calling the corresponding method in Handler when the user inputs a command
 // code referenced from FitLifeGymKiosk practice project and TellerApp project
 public class Application {
-
     private static final String ADD_COMMAND = "add";
     private static final String GET_MASKS_COMMAND = "get masks";
     private static final String GET_DATE_COMMAND = "get date";
@@ -147,6 +142,7 @@ public class Application {
         }
     }
 
+    //getters:
     public LocalList getLocalList() {
         return localList;
     }

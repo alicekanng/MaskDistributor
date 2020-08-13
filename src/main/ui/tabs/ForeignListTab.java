@@ -59,10 +59,13 @@ public class ForeignListTab extends ListTab {
         }
     }
 
+    //getters:
+    @Override
     public DefaultListModel getListModel() {
         return foreignModel;
     }
 
+    @Override
     public JList getDistributionList() {
         return foreignList;
     }

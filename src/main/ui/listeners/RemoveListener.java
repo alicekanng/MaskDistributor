@@ -13,11 +13,11 @@ import java.io.*;
 // code referenced from Oracle's ListDemo project
 public class RemoveListener implements ActionListener {
     private static final String REMOVE_CUSTOMER_SOUND = "./data/sounds/RemoveCustomerSound.wav";
-    private ListTab listTab;
-    private String selected;
-
     private static final String LOCAL_LIST_FILE = "./data/localList.txt";
     private static final String FOREIGN_LIST_FILE = "./data/foreignList.txt";
+
+    private ListTab listTab;
+    private String selected;
 
     public RemoveListener(ListTab listTab) {
         this.listTab = listTab;
@@ -54,6 +54,7 @@ public class RemoveListener implements ActionListener {
     }
 
     //EFFECTS: saves user's deletion to local file
+    // throw IOException if an exception is raised when opening or reading given file
     private void saveToLocalFile() throws IOException {
         java.io.FileWriter fileWriter = new java.io.FileWriter(new File(LOCAL_LIST_FILE));
         PrintWriter pw = new PrintWriter(fileWriter);
@@ -67,6 +68,7 @@ public class RemoveListener implements ActionListener {
     }
 
     //EFFECTS: saves user's deletion to foreign file
+    // throw IOException if an exception is raised when opening or reading given file
     private void saveToForeignFile() throws IOException {
         java.io.FileWriter fileWriter = new java.io.FileWriter(new File(FOREIGN_LIST_FILE));
         PrintWriter pw = new PrintWriter(fileWriter);

@@ -147,28 +147,6 @@ public class Application {
         }
     }
 
-    //EFFECTS: save edited local distribution list to LOCAL_LIST_FILE
-    public void saveLocalList(Customer customer) {
-        try {
-            FileWriter fileWriter = new FileWriter(new FileOutputStream(new File(LOCAL_LIST_FILE), true));
-            fileWriter.write(customer);
-            fileWriter.close();
-        } catch (FileNotFoundException e) {
-            System.err.println("Cannot find file to save to!");
-        }
-    }
-
-    //EFFECTS: save edited foreign distribution list to FOREIGN_LIST_FILE
-    public void saveForeignList(Customer customer) {
-        try {
-            FileWriter fileWriter = new FileWriter(new FileOutputStream(new File(FOREIGN_LIST_FILE), true));
-            fileWriter.write(customer);
-            fileWriter.close();
-        } catch (FileNotFoundException e) {
-            System.err.println("Cannot find file to save to!");
-        }
-    }
-
     public LocalList getLocalList() {
         return localList;
     }

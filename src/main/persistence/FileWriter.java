@@ -23,4 +23,8 @@ public class FileWriter {
     public void close() {
         printWriter.close();
     }
+
+    public PrintWriter getPrintWriter() {
+        return printWriter;
+    }
 }

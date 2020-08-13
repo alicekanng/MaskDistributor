@@ -11,7 +11,6 @@ public class DistributionListUI extends JFrame {
     private HomeTab homeTab;
     private LocalListTab localTab;
     private ForeignListTab foreignTab;
-    private Application app;
 
     public static final int HOME_TAB_INDEX = 0;
     public static final int LOCAL_TAB_INDEX = 1;

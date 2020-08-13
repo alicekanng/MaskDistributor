@@ -1,7 +1,5 @@
 package ui.listeners;
 
-import model.Customer;
-import persistence.FileReader;
 import ui.tabs.ListTab;
 
 import javax.sound.sampled.AudioInputStream;
@@ -10,16 +8,13 @@ import javax.sound.sampled.Clip;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
-import java.util.List;
 
+// implements behaviour of program when the remove button is clicked
+// code referenced from Oracle's ListDemo project
 public class RemoveListener implements ActionListener {
     private static final String REMOVE_CUSTOMER_SOUND = "./data/sounds/RemoveCustomerSound.wav";
     private ListTab listTab;
-    private List<String> entries;
-    private List<Customer> customers;
-
-    private static final String NAME_DELIM = ": ";
-    private static final String INFO_DELIM = " / ";
+    private String selected;
 
     private static final String LOCAL_LIST_FILE = "./data/localList.txt";
     private static final String FOREIGN_LIST_FILE = "./data/foreignList.txt";
@@ -32,66 +27,56 @@ public class RemoveListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         int index = listTab.getDistributionList().getSelectedIndex();
-        String entry = (String) listTab.getDistributionList().getSelectedValue();
+        selected = (String) listTab.getDistributionList().getModel().getElementAt(index);
+
         if (index != -1) {
             playRemoveCustomerSound();
-            entries.add(entry);
-            saveEntryToFile(entry);
             listTab.getListModel().remove(index);
             listTab.getDistributionList().setSelectedIndex(index);
             listTab.getDistributionList().ensureIndexIsVisible(index);
+            saveChangesToFile();
         }
     }
 
-    public void saveEntryToFile(String entry) {
-        FileReader fileReader = new FileReader();
-        customers = fileReader.parseCustomers(entries);
-
-        File originalFile = new File(FOREIGN_LIST_FILE);
-        File tempFile = new File(FOREIGN_LIST_FILE + ".tmp");
-
+    //EFFECTS: if the user's selected entry contains "BC", save deletion to local list file
+    // otherwise, save deletion to foreign list file
+    public void saveChangesToFile() {
         try {
-            BufferedReader br = new BufferedReader(new java.io.FileReader(originalFile));
-            PrintWriter pw = new PrintWriter(new FileWriter(tempFile));
-
-            Customer line = null;
-
-            while ((line = br.readLine()) != null) {
-                if (!line.trim().equals(entry)) {
-                    pw.println(line);
-                    pw.flush();
-                }
+            if (selected.contains("BC")) {
+                saveToLocalFile();
+            } else {
+                saveToForeignFile();
             }
-            pw.close();
-            br.close();
-
-        } catch (Exception e) {
-            System.err.println("Caught Exception.");
+        } catch (IOException ioException) {
+            System.err.println("Caught IO Exception.");
+            ioException.printStackTrace();
         }
-
-        if (!originalFile.delete()) {
-            System.out.println("Could not delete file");
-        }
-
-        if (!tempFile.renameTo(originalFile)) {
-            System.out.println("Could not rename file.");
-        }
-//
-//        for (Customer c : customers) {
-//            if (c.getAddress().contains("BC")) {
-//                saveToLocalFile(c);
-//            } else {
-//                saveToForeignFile(c);
-//            }
-//        }
     }
 
-    public String customerToString(Customer c) {
-        String entry = c.getName() + NAME_DELIM
-                + c.getAddress() + INFO_DELIM
-                + c.getAge() + INFO_DELIM
-                + c.getConditions();
-        return entry;
+    //EFFECTS: saves user's deletion to local file
+    private void saveToLocalFile() throws IOException {
+        java.io.FileWriter fileWriter = new java.io.FileWriter(new File(LOCAL_LIST_FILE));
+        PrintWriter pw = new PrintWriter(fileWriter);
+        for (int i = 0; i < listTab.getDistributionList().getModel().getSize(); i++) {
+            String line = (String) listTab.getDistributionList().getModel().getElementAt(i);
+            pw.println(line);
+            pw.flush();
+        }
+        pw.close();
+        fileWriter.close();
+    }
+
+    //EFFECTS: saves user's deletion to foreign file
+    private void saveToForeignFile() throws IOException {
+        java.io.FileWriter fileWriter = new java.io.FileWriter(new File(FOREIGN_LIST_FILE));
+        PrintWriter pw = new PrintWriter(fileWriter);
+        for (int i = 0; i < listTab.getDistributionList().getModel().getSize(); i++) {
+            String line = (String) listTab.getDistributionList().getModel().getElementAt(i);
+            pw.println(line);
+            pw.flush();
+        }
+        pw.close();
+        fileWriter.close();
     }
 
     //EFFECTS: plays sound every time the remove button is pressed

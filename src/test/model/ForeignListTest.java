@@ -10,6 +10,7 @@ import java.util.List;
 import static model.ForeignList.FOREIGN_DATES;
 import static org.junit.jupiter.api.Assertions.*;
 
+// tests for ForeignList class
 public class ForeignListTest {
     private ForeignList testList;
     private Customer testAdultNoCondition;

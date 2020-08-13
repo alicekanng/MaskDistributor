@@ -1,7 +1,6 @@
 package ui.tabs;
 
 import model.DistributionList;
-import ui.Application;
 import ui.listeners.AddListener;
 import ui.listeners.RemoveListener;
 
@@ -9,6 +8,8 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 
+// Constructs the general structure of the list tabs,
+// setting up the scroll pane, buttons, and other common functionalities
 public abstract class ListTab extends JPanel implements ListSelectionListener {
     private JPanel buttonPane;
     protected JButton addButton;

@@ -1,41 +1,32 @@
 package ui.listeners;
 
-import model.Customer;
-import persistence.FileReader;
-import persistence.FileWriter;
 import ui.tabs.ListTab;
 
 import javax.sound.sampled.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.util.LinkedList;
-import java.util.List;
+import java.io.*;
 
+// implements behaviour of program when the remove button is clicked
+// code referenced from Oracle's ListDemo project
 public class AddListener implements ActionListener {
     private static final String ADD_CUSTOMER_SOUND = "./data/sounds/AddCustomerSound.wav";
 
     private ListTab listTab;
-    private List<String> entries;
-    private List<Customer> customers;
+    private String entry;
 
     private static final String LOCAL_LIST_FILE = "./data/localList.txt";
     private static final String FOREIGN_LIST_FILE = "./data/foreignList.txt";
 
     public AddListener(ListTab listTab) {
         this.listTab = listTab;
-        entries = new LinkedList<>();
-        customers = new LinkedList<>();
     }
 
     //EFFECTS: adds user input to list of strings of customer data, then inserts the entry into either
     // after the selected index of the GUI list or at the front of the list if there is no selected index
     @Override
     public void actionPerformed(ActionEvent e) {
-        String entry = listTab.getCustomerEntry().getText();
-        entries.add(entry);
+        entry = listTab.getCustomerEntry().getText();
 
         if (!entry.equals("")) {
             int index = listTab.getDistributionList().getSelectedIndex();
@@ -47,47 +38,51 @@ public class AddListener implements ActionListener {
 
             playAddCustomerSound();
             listTab.getListModel().insertElementAt(entry, index);
-            saveEntryToFile();
             listTab.getCustomerEntry().requestFocusInWindow();
             listTab.getCustomerEntry().setText("");
+            saveChangesToFile();
         }
     }
 
-    //EFFECTS: parses the list of strings of customer data into a list of customers, then saves the list into a
-    // file according to the customer's address
-    public void saveEntryToFile() {
-        FileReader fileReader = new FileReader();
-        customers = fileReader.parseCustomers(entries);
-
-        for (Customer c : customers) {
-            if (c.getAddress().contains("BC")) {
-                saveToLocalFile(c);
+    //EFFECTS: if the user's input contains the sequence "BC", then save input to local file
+    // otherwise, save input to foreign file
+    public void saveChangesToFile() {
+        try {
+            if (entry.contains("BC")) {
+                saveToLocalFile();
             } else {
-                saveToForeignFile(c);
+                saveToForeignFile();
             }
+        } catch (IOException ioException) {
+            System.err.println("Caught IO Exception.");
+            ioException.printStackTrace();
         }
     }
 
-    //EFFECTS: helper to save the customers into the Foreign list file
-    private void saveToForeignFile(Customer c) {
-        try {
-            FileWriter fileWriter = new FileWriter(new FileOutputStream(new File(FOREIGN_LIST_FILE), true));
-            fileWriter.write(c);
-            fileWriter.close();
-        } catch (FileNotFoundException fileNotFoundException) {
-            System.err.println("Cannot find file to save to!");
+    //EFFECTS: saves user's input to local file
+    private void saveToLocalFile() throws IOException {
+        java.io.FileWriter fileWriter = new java.io.FileWriter(new File(LOCAL_LIST_FILE));
+        PrintWriter pw = new PrintWriter(fileWriter);
+        for (int i = 0; i < listTab.getDistributionList().getModel().getSize(); i++) {
+            String line = (String) listTab.getDistributionList().getModel().getElementAt(i);
+            pw.println(line);
+            pw.flush();
         }
+        pw.close();
+        fileWriter.close();
     }
 
-    //EFFECTS: helper to save the customers into the Local list file
-    private void saveToLocalFile(Customer c) {
-        try {
-            FileWriter fileWriter = new FileWriter(new FileOutputStream(new File(LOCAL_LIST_FILE), true));
-            fileWriter.write(c);
-            fileWriter.close();
-        } catch (FileNotFoundException fileNotFoundException) {
-            System.err.println("Cannot find file to save to!");
+    //EFFECTS: saves user's input to foreign file
+    private void saveToForeignFile() throws IOException {
+        java.io.FileWriter fileWriter = new java.io.FileWriter(new File(FOREIGN_LIST_FILE));
+        PrintWriter pw = new PrintWriter(fileWriter);
+        for (int i = 0; i < listTab.getDistributionList().getModel().getSize(); i++) {
+            String line = (String) listTab.getDistributionList().getModel().getElementAt(i);
+            pw.println(line);
+            pw.flush();
         }
+        pw.close();
+        fileWriter.close();
     }
 
     //EFFECTS: plays sound every time the add button is pressed

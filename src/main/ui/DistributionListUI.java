@@ -6,6 +6,7 @@ import ui.tabs.LocalListTab;
 
 import javax.swing.*;
 
+// Sets up the GUI frame with all its tabs
 public class DistributionListUI extends JFrame {
     private HomeTab homeTab;
     private LocalListTab localTab;

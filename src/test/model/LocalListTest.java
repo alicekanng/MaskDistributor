@@ -12,6 +12,7 @@ import static model.LocalList.LOCAL_DATES;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.fail;
 
+// tests for LocalList class
 public class LocalListTest {
     private LocalList testList;
     private Customer testAdultNoCondition;

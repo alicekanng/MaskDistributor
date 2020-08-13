@@ -11,6 +11,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+// tests for FileReader class
 //code referenced from TellerApp project
 public class FileReaderTest {
     private static String LOCAL_PATHNAME = "./data/testLocalListFile.txt";

@@ -2,7 +2,8 @@ package persistence;
 
 import java.io.PrintWriter;
 
-//code referenced from TellerApp project
+// interface that allows its subclasses to be saved by the FileWriter class
+// code referenced from TellerApp project
 public interface Saveable {
 
     // MODIFIES: printWriter

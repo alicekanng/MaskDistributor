@@ -2,12 +2,13 @@ package persistence;
 
 import java.io.*;
 
-//code referenced from TellerApp project
+// Writer that writes info into saved files in data folder
+// code referenced from TellerApp project
 public class FileWriter {
     private PrintWriter printWriter;
 
     //EFFECTS: constructs a new writer that will write data to file
-    public FileWriter(FileOutputStream file) throws FileNotFoundException {
+    public FileWriter(FileOutputStream file) {
         printWriter = new PrintWriter(file);
     }
 

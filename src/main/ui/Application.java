@@ -13,7 +13,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Scanner;
 
-//code referenced from FitLifeGymKiosk practice project and TellerApp project
+// Constructs the "home screen" and sets up the application,
+// calling the corresponding method in Handler when the user inputs a command
+// code referenced from FitLifeGymKiosk practice project and TellerApp project
 public class Application {
 
     private static final String ADD_COMMAND = "add";

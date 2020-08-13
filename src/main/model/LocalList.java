@@ -2,6 +2,7 @@ package model;
 
 import exceptions.CustomerNotInListException;
 
+// constructs local distribution list
 public class LocalList extends DistributionList {
     public static final int LOCAL_DATES = 7;
 

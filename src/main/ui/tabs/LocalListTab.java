@@ -7,6 +7,7 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import java.awt.*;
 
+// Constructs the tab containing the foreign distribution list
 public class LocalListTab extends ListTab {
     private JList<String> localList;
     private DefaultListModel<String> localModel;
@@ -15,8 +16,8 @@ public class LocalListTab extends ListTab {
     public LocalListTab() {
         super();
 
-        localModel = new DefaultListModel<String>();
-        localList = new JList<String>(localModel);
+        localModel = new DefaultListModel<>();
+        localList = new JList<>(localModel);
         listSetUp();
     }
 

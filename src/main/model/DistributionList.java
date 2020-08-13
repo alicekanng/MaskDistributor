@@ -5,6 +5,7 @@ import exceptions.CustomerNotInListException;
 import java.util.LinkedList;
 import java.util.List;
 
+// abstract class that contains the common functionalities of the local and foreign distribution lists
 public abstract class DistributionList {
     public static final int MASK_DISTRIBUTED = 15;
 

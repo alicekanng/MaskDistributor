@@ -7,6 +7,7 @@ import model.LocalList;
 
 import java.util.Scanner;
 
+// Handles all input of customer details and output of the corresponding customer's info
 public class Handler {
 
     private Scanner sc;

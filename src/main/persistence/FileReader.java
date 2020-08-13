@@ -10,7 +10,8 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-//code referenced from TellerApp project
+// Reader that reads info from saved files in data folder
+// code referenced from TellerApp project
 public class FileReader {
     public static final String NAME_DELIM = ": ";
     public static final String INFO_DELIM = " / ";

@@ -7,6 +7,8 @@ import ui.listeners.LocalButtonListener;
 import javax.swing.*;
 import java.awt.*;
 
+// Constructs the home screen to the GUI, greets user and has buttons that lead to their corresponding list tab
+// code referenced from SmartHome project
 public class HomeTab extends JPanel {
     private static final String GREETING = "Welcome to the Mask Distributor Application!";
     private static final String INSTRUCTIONS = "Please choose which distribution list you would like to load.";

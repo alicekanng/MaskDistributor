@@ -6,6 +6,7 @@ import persistence.Saveable;
 import java.io.PrintWriter;
 import java.util.Objects;
 
+// constructs customer object with their name, address, age, conditions, receive date, position and number of masks
 public class Customer implements Saveable {
     private String name;
     private String address;

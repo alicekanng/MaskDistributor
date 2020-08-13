@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
+// implements behaviour of program when the foreign list button is clicked
 public class ForeignButtonListener implements ActionListener {
     private static final String LOAD_LIST_SOUND = "./data/sounds/LoadListSound.wav";
 

@@ -7,6 +7,7 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import java.awt.*;
 
+// Constructs the tab containing the foreign distribution list
 public class ForeignListTab extends ListTab {
     private JList<String> foreignList;
     private DefaultListModel<String> foreignModel;
@@ -15,8 +16,8 @@ public class ForeignListTab extends ListTab {
     public ForeignListTab() {
         super();
 
-        foreignModel = new DefaultListModel<String>();
-        foreignList = new JList<String>(foreignModel);
+        foreignModel = new DefaultListModel<>();
+        foreignList = new JList<>(foreignModel);
         listSetUp();
     }
 

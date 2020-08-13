@@ -2,6 +2,7 @@ package model;
 
 import exceptions.CustomerNotInListException;
 
+// constructs foreign distribution list
 public class ForeignList extends DistributionList {
     public static final int FOREIGN_DATES = 30;
 
